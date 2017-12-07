@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Uniq</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    function loadScriptsAsync(scripts) {
+      var firstScriptElement = document.getElementsByTagName('script')[0];
+
+      for (var scriptId in scripts) {
+        if (!scripts.hasOwnProperty(scriptId)) {
+          continue;
+        }
+
+        var scriptElement = document.createElement('script');
+        scriptElement.id = scriptId;
+        scriptElement.src = scripts[scriptId];
+
+        firstScriptElement.parentNode.insertBefore(scriptElement, firstScriptElement);
+      }
+    }
+
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId: '113452516022554',
+        status: true,
+        version: 'v2.10'
+      });
+    };
+
+    loadScriptsAsync({
+      'facebook-sdk-script': '//connect.facebook.net/en_US/sdk.js'
+    });
+  </script>
+  <script src="/client-fastopt-library.js"></script>
+  <script src="/client-fastopt-loader.js"></script>
+  <script src="/client-fastopt-stylesheets.js"></script>
+  <script src="/client-fastopt.js"></script>
+  <script>
+    uniq.client.Client.main();
+  </script>
+</body>
+</html>
