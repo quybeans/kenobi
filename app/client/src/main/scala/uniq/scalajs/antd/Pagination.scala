@@ -5,8 +5,6 @@ package uniq.scalajs.antd
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
 
-import japgolly.scalajs.react.CtorType.ChildArg
-
 // scalastyle:off underscore.import
 import japgolly.scalajs.react._
 import japgolly.scalajs.react.component.Js
@@ -23,7 +21,8 @@ object Pagination {
     val total: Int,
     val showQuickJumper: Boolean,
     val simple: Boolean,
-    val onChange: js.Function2[Int, Int, Unit]
+    val onChange: js.Function2[Int, Int, Unit],
+    val defaultPageSize: Int
   ) extends js.Object
 
   private val component = JsComponent[Props, Children.None, Null](RawComponent)
@@ -33,10 +32,11 @@ object Pagination {
     total: Int = 0,
     showQuickJumper: Boolean = false,
     simple: Boolean = false,
-    onChange: (Int, Int) => Callback
+    onChange: (Int, Int) => Callback,
+    defaultPageSize: Int = 1
   ): Js.UnmountedWithRawType[_, _, _] = {
     component(new Props(
-      current, total, showQuickJumper, simple, (p, ps) => onChange(p, ps).runNow()
+      current, total, showQuickJumper, simple, (p, ps) => onChange(p, ps).runNow(), defaultPageSize
     ))
   }
 }

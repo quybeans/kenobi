@@ -85,10 +85,14 @@ object Server extends App {
     )
   } ~ (get & path("accounts")) {
     complete {
-      val followers = Source.fromFile(new File(s"../server/target/scala-2.12/classes/data/28600663_followers.txt"))
-      followers.getLines().slice(0, 8000).toList.map { line =>
-        line.split("\t").head
-      }.asJson
+      val dir = new File("../server/target/scala-2.12/classes/data/crawled")
+      if (dir.exists() && dir.isDirectory) {
+        dir.listFiles.filter(_.getName.split("_").last == "posts.txt").toList.map { file =>
+          file.getName.split("_").head
+        }.asJson
+      } else {
+        "Empty list."
+      }
     }
   } ~ (post & path("classify")) {
     entity(as[IgResult]) { result =>
